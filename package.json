@@ -1,7 +1,18 @@
 {
-  "name": "component-lib",
+  "name": "component-lib-kdu",
   "version": "0.1.0",
-  "private": true,
+  "main": "./index.ts",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaduVuotto/component-lib-kdu.git"
+  },
+  "keywords": [
+    "Kadu Vuotto",
+    "biblioteca de componente",
+    "component library"
+  ],
+  "author": "Kadu Vuotto",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
