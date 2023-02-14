@@ -1,3 +1,5 @@
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+
 module.exports = {
   stories: ["../components/**/*.stories.mdx", "../components/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -10,11 +12,21 @@ module.exports = {
   core: {
     builder: "@storybook/builder-webpack5",
   },
-  webpackFinal: (config) => {
-    config.module.rules.push({
-      test: /\.ts(x)?$/,
-      use: "ts-loader",
-    });
+  webpackFinal: async (config) => {
+    config.resolve.plugins = [
+      ...(config.resolve.plugins || []),
+      new TsconfigPathsPlugin({
+        extensions: config.resolve.extensions,
+      }),
+    ];
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "react-native$": "react-native-web",
+    };
+
+    config.module.rules.push({ test: /\.([cm]?ts|tsx)$/, loader: "ts-loader" });
+
     return config;
   },
 };
